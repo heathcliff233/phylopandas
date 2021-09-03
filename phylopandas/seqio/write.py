@@ -165,7 +165,7 @@ def _write(
         with open(filename, 'w+') as f:
             f.write('>')
         seq_records.to_csv(filename, sep='\n', header=False, index=False, line_terminator='\n>', mode='a+')
-        os.system("truncate -s-1 ", filename)
+        os.system("truncate -s-1 "+filename)
         return
 
     # Build a list of records from a pandas DataFrame
