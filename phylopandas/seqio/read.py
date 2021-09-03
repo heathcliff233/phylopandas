@@ -5,6 +5,7 @@ Functions for reading sequence files into pandas DataFrame.
 # Imports
 from Bio import SeqIO
 from Bio.Seq import Seq
+from Bio.SeqIO import FastaIO
 from Bio.SeqRecord import SeqRecord
 from Bio.Blast import NCBIXML
 
@@ -37,7 +38,7 @@ def _read(
     filename,
     schema,
     seq_label='sequence',
-    use_uids=True,
+    use_uids=False,
     **kwargs):
     """Use BioPython's sequence parsing module to convert any file format to
     a Pandas DataFrame.
@@ -48,6 +49,9 @@ def _read(
         - description
         - sequence
     """
+    if schema=="fasta_dev":
+        data = pd.read_csv(filename, sep='\n', lineterminator='\n>', header=None, names=['id', 'sequence'])
+        return data
 
     # Prepare DataFrame fields.
     data = {
@@ -81,7 +85,7 @@ def _read_method(schema):
         filename,
         seq_label='sequence',
         combine_on='uid',
-        use_uids=True,
+        use_uids=False,
         **kwargs):
         # Use generic write class to write data.
         df0 = self._data
@@ -105,7 +109,7 @@ def _read_function(schema):
     def func(
         filename,
         seq_label='sequence',
-        use_uids=True,
+        use_uids=False,
         **kwargs):
         # Use generic write class to write data.
         return _read(
@@ -122,6 +126,7 @@ def _read_function(schema):
 
 # Various read functions to various formats.
 read_fasta = _read_function('fasta')
+read_fasta_dev = _read_function('fasta_dev')
 read_phylip = _read_function('phylip')
 read_clustal = _read_function('clustal')
 read_embl = _read_function('embl')

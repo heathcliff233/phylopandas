@@ -51,6 +51,7 @@ class PhyloPandasDataFrameMethods(object):
 
     # Sequence file reading methods
     read_fasta = seqio.read._read_method('fasta')
+    read_fasta_dev = seqio.read._read_method('fasta_dev')
     read_phylip = seqio.read._read_method('phylip')
     read_clustal = seqio.read._read_method('clustal')
     read_embl = seqio.read._read_method('embl')
@@ -84,6 +85,7 @@ class PhyloPandasDataFrameMethods(object):
     # -----------------------------------------------------------
 
     to_fasta = seqio.write._write_method('fasta')
+    to_fasta_dev = seqio.write._write_method('fasta_dev')
     to_phylip = seqio.write._write_method('phylip')
     to_clustal = seqio.write._write_method('clustal')
     to_embl = seqio.write._write_method('embl')

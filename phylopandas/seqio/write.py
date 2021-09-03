@@ -2,7 +2,7 @@ __doc__ = """
 Functions for write sequence data to sequence files.
 """
 import pandas as pd
-
+import os
 # Import Biopython
 from Bio import SeqIO
 from Bio.Seq import Seq
@@ -32,7 +32,7 @@ def _write_doc_template(schema):
 
 def pandas_df_to_biopython_seqrecord(
     df,
-    id_col='uid',
+    id_col='id',
     sequence_col='sequence',
     extra_data=None,
     ):
@@ -89,7 +89,7 @@ def pandas_df_to_biopython_seqrecord(
 
 def pandas_series_to_biopython_seqrecord(
     series,
-    id_col='uid',
+    id_col='id',
     sequence_col='sequence',
     extra_data=None,
     ):
@@ -139,7 +139,7 @@ def _write(
     data,
     filename=None,
     schema='fasta',
-    id_col='uid',
+    id_col='id',
     sequence_col='sequence',
     extra_data=None,
     **kwargs):
@@ -160,6 +160,13 @@ def _write(
     id_only : bool (default=False)
         If True, use only the ID column to label sequences in fasta.
     """
+    if schema=="fasta_dev":
+        seq_records = data.loc[:,['id', 'sequence']]
+        with open(filename, 'w+') as f:
+            f.write('>')
+        seq_records.to_csv(filename, sep='\n', header=False, index=False, line_terminator='\n>', mode='a+')
+        os.system("truncate -s-1 ", filename)
+        return
 
     # Build a list of records from a pandas DataFrame
     if type(data) is pd.DataFrame:
@@ -193,7 +200,7 @@ def _write_method(schema):
         self,
         filename=None,
         schema=schema,
-        id_col='uid',
+        id_col='id',
         sequence_col='sequence',
         extra_data=None,
         **kwargs):
@@ -219,7 +226,7 @@ def _write_function(schema):
         data,
         filename=None,
         schema=schema,
-        id_col='uid',
+        id_col='id',
         sequence_col='sequence',
         extra_data=None,
         **kwargs):
@@ -240,6 +247,7 @@ def _write_function(schema):
 
 # Write functions to various formats.
 to_fasta = _write_function('fasta')
+to_fasta_dev = _write_function('fasta_dev')
 to_phylip = _write_function('phylip')
 to_clustal = _write_function('clustal')
 to_embl = _write_function('embl')
