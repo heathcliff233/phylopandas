@@ -50,7 +50,7 @@ def _read(
         - sequence
     """
     if schema=="fasta_dev":
-        data = pd.read_csv(filename, sep='\n', lineterminator='\n>', header=None, names=['id', 'sequence'])
+        data = pd.read_csv(filename, sep='\n', lineterminator='>', header=None, index_col=False, names=['id', 'sequence', 'placeholder'])
         return data
 
     # Prepare DataFrame fields.
