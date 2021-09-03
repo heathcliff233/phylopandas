@@ -1,5 +1,6 @@
 from .read import (read_embl,
                    read_fasta,
+                   read_fasta_dev,
                    read_fastq,
                    read_nexus_seq,
                    read_swiss,
