@@ -29,8 +29,9 @@ Read in a sequence file.
 ```python
 import phylopandas as ph
 
-df1 = ph.read_fasta('sequences.fasta')
-df2 = ph.read_phylip('sequences.phy')
+df1 = ph.read_fasta('sequences.fasta')    # for fasta
+df2 = ph.read_fasta_dev('sequence.fasta') # for two-line fasta
+df3 = ph.read_phylip('sequences.phy')
 ```
 
 Write to various sequence file formats.
@@ -47,6 +48,8 @@ df = ph.read_fasta('sequences.fasta')
 
 # Write to a different format.
 df.phylo.to_phylip('sequences.phy')
+df.phylo.to_fasta_dev('seq_two_line.fasta') # to two line fasta
+df.phylo.to_embl(mtype='protein', filename='sequences.embl') # set type of SeqRecord annotation property with mtype arg
 ```
 
 **Tree data:**
@@ -54,13 +57,6 @@ df.phylo.to_phylip('sequences.phy')
 Read newick tree data
 ```python
 df = ph.read_newick('tree.newick')
-```
-
-Visualize the phylogenetic data (powered by [phylovega](https://github.com/Zsailer/phylovega)).
-```python
-df.phylo.display(
-    height=500,
-)
 ```
 
 <img src='docs/_images/tree.png' align="middle" height="200">

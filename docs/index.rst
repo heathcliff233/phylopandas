@@ -40,7 +40,7 @@ Write ``phylopandas.DataFrame`` data to sequence file.
 
 .. code-block:: python
 
-  df1.to_clustal('sequences.clustal')
+  df1.phylo.to_clustal('sequences.clustal')
 
 Convert between two sequence formats.
 
@@ -50,7 +50,7 @@ Convert between two sequence formats.
   df = phypd.read_fasta('sequences.fasta')
 
   # Write to phylip.
-  df.to_phylip('sequences.phy')
+  df.phylo.to_phylip('sequences.phy')
 
 See the Cookbook_ page for more things you can do.
 
