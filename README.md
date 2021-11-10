@@ -59,8 +59,6 @@ Read newick tree data
 df = ph.read_newick('tree.newick')
 ```
 
-<img src='docs/_images/tree.png' align="middle" height="200">
-
 ## Contributing
 
 If you have ideas for the project, please share them on the project's [Gitter chat](https://gitter.im/phylopandas/Lobby).
@@ -87,7 +85,7 @@ pip install phylopandas
 
 Install from source:
 ```
-git clone https://github.com/Zsailer/phylopandas
+git clone https://github.com/heathcliff233/phylopandas
 cd phylopandas
 pip install -e .
 ```
