@@ -35,6 +35,7 @@ def pandas_df_to_biopython_seqrecord(
     id_col='id',
     sequence_col='sequence',
     extra_data=None,
+    mtype=None,
     ):
     """Convert pandas dataframe to biopython seqrecord for easy writing.
 
@@ -46,11 +47,14 @@ def pandas_df_to_biopython_seqrecord(
     id_col : str
         column in dataframe to use as sequence label
 
-    sequence_col str:
+    sequence_col : str
         column in dataframe to use as sequence data
 
     extra_data : list
         extra columns to use in sequence description line
+
+    mtype : str
+        molecule type that should be set in annotation
 
     Returns
     -------
@@ -76,10 +80,12 @@ def pandas_df_to_biopython_seqrecord(
                 description = " ".join([row[key] for key in extra_data])
 
             # Build a record
+            annotations = {"molecule_type": mtype} if mtype else None
             record = SeqRecord(
                 seq=seq,
                 id=id,
                 description=description,
+                annotations=annotations,
             )
             seq_records.append(record)
         except TypeError:
@@ -92,6 +98,7 @@ def pandas_series_to_biopython_seqrecord(
     id_col='id',
     sequence_col='sequence',
     extra_data=None,
+    mtype=None,
     ):
     """Convert pandas series to biopython seqrecord for easy writing.
 
@@ -108,6 +115,9 @@ def pandas_series_to_biopython_seqrecord(
 
     extra_data : list
         extra columns to use in sequence description line
+
+    mtype : str
+        molecule type that should be set in annotation
 
     Returns
     -------
@@ -126,10 +136,12 @@ def pandas_series_to_biopython_seqrecord(
         description = " ".join([series[key] for key in extra_data])
 
     # Build a record
+    annotations = {"molecule_type": mtype} if mtype else None
     record = SeqRecord(
         seq=seq,
         id=id,
         description=description,
+        annotations=annotations,
     )
 
     seq_records = [record]
@@ -142,6 +154,7 @@ def _write(
     id_col='id',
     sequence_col='sequence',
     extra_data=None,
+    mtype=None,
     **kwargs):
     """General write function. Write phylopanda data to biopython format.
 
@@ -159,6 +172,9 @@ def _write(
 
     id_only : bool (default=False)
         If True, use only the ID column to label sequences in fasta.
+
+    mtype : str
+        molecule type that should be set in annotation
     """
     if schema=="fasta_dev":
         seq_records = data.loc[:,['id', 'sequence']]
@@ -175,6 +191,7 @@ def _write(
             id_col=id_col,
             sequence_col=sequence_col,
             extra_data=extra_data,
+            mtype=mtype,
         )
 
     # Build a record from a pandas Series
@@ -184,6 +201,7 @@ def _write(
             id_col=id_col,
             sequence_col=sequence_col,
             extra_data=extra_data,
+            mtype=mtype,
         )
 
     # Write to disk or return string
@@ -203,6 +221,7 @@ def _write_method(schema):
         id_col='id',
         sequence_col='sequence',
         extra_data=None,
+        mtype=None,
         **kwargs):
         # Use generic write class to write data.
         return _write(
@@ -212,6 +231,7 @@ def _write_method(schema):
             id_col=id_col,
             sequence_col=sequence_col,
             extra_data=extra_data,
+            mtype=mtype,
             **kwargs
         )
     # Update docs
@@ -229,6 +249,7 @@ def _write_function(schema):
         id_col='id',
         sequence_col='sequence',
         extra_data=None,
+        mtype=None,
         **kwargs):
         # Use generic write class to write data.
         return _write(
@@ -238,6 +259,7 @@ def _write_function(schema):
             id_col=id_col,
             sequence_col=sequence_col,
             extra_data=extra_data,
+            mtype=mtype,
             **kwargs
         )
     # Update docs

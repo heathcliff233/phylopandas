@@ -6,11 +6,12 @@ from . import seqio
 from . import treeio
 
 
+'''
 try: 
     from phylovega import TreeChart
 except ImportError:
     TreeChart = None
-
+'''
 
 @register_series_accessor('phylo')
 class PhyloPandasSeriesMethods(object):
@@ -199,6 +200,7 @@ class PhyloPandasDataFrameMethods(object):
         # Return dataframe (maintaining original order)
         return df[column_idx]
 
+    '''
     def display(self, **kwargs):
         __doc__ = TreeChart.__doc__
         # Show the tree using phylovega.
@@ -208,4 +210,4 @@ class PhyloPandasDataFrameMethods(object):
             return TreeChart(self._data.to_dict(orient='records'), **kwargs)
         except NameError:
             raise NameError("Looks like phylovega couldn't be imported. Is phylovega installed?")
-
+    '''

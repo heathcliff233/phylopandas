@@ -98,7 +98,7 @@ class Testframe(object):
 
         # Write to csv
         embl_path = os.path.join(path_to_dat, 'test.embl')
-        df.phylo.to_embl(alphabet='protein', filename=embl_path)
+        df.phylo.to_embl(mtype='protein', filename=embl_path)
         assert os.path.exists(embl_path)
 
     @pytest.mark.usefixtures("clean_dat")
@@ -108,5 +108,5 @@ class Testframe(object):
 
         # Write to csv
         nexus_path = os.path.join(path_to_dat, 'test.nexus')
-        df.phylo.to_nexus_seq(alphabet='protein', filename=nexus_path)
+        df.phylo.to_nexus_seq(mtype='protein', filename=nexus_path)
         assert os.path.exists(nexus_path)
