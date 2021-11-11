@@ -2,8 +2,8 @@
 
 [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/phylopandas/Lobby)
 [![Documentation Status](http://readthedocs.org/projects/phylopandas/badge/?version=latest)](http://phylopandas.readthedocs.io/en/latest/?badge=latest)
-[![Build Status](https://travis-ci.org/Zsailer/phylopandas.svg?branch=master)](https://travis-ci.org/Zsailer/phylopandas)
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/Zsailer/phylopandas/master?filepath=examples%2Fintro-notebook.ipynb)
+[![Build Status](https://dev.azure.com/heathcliff2333/heathcliff2333/_apis/build/status/heathcliff233.phylopandas?branchName=master)](https://dev.azure.com/heathcliff2333/heathcliff2333/_build/latest?definitionId=1&branchName=master)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/heathcliff233/phylopandas/master?filepath=examples%2Fintro-notebook.ipynb)
 
 **Bringing the [Pandas](https://github.com/pandas-dev/pandas) `DataFrame` to phylogenetics.**
 
